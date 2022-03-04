@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Amicable</title>
+    <style type="text/css">
+    	body {background-color: #e89ee1;}
+    	#result {padding: 6px; width: 350px; border: 1px solid #333;}
+
+    </style>
+    
+</head>
+
+<body >
+    <h1> Are They Amicable? </h1>
+    <h3> Enter two numbers below to check if they are amicable! </h3>
+    
+    <form name = 'form1'>      
+        <input type="text" name = 'num1' id='num1'>
+        <input type="text" name = 'num2' id='num2'>
+    </form>
+    <button id = "button">submit</button>
+    <br>
+    <br>
+    <div id= "result">&nbsp;</div>
+    <br>
+    <div id= "factorsNum1">&nbsp;</div>
+    <div id= "factorsNum2">&nbsp;</div>    
+</body>
+
+<script language="javascript">
+    function getFactors(num) {
+        numFactors = [];
+        for(i = 1; i < num; i++ ){
+            if (num % i == 0) {
+                numFactors.push(i);
+            }
+        }
+        return numFactors;
+    }
+    function isAmicable(num1, num2) {
+        isAmicableVar = false
+        num1Factors = getFactors(num1);
+        num2Factors = getFactors(num2);
+        num1SumFactors = getFactorsSum(num1Factors);
+        num2SumFactors = getFactorsSum(num2Factors);
+        
+        if ((num1SumFactors == num2) && (num2SumFactors == num1)) {
+            isAmicableVar = true; 
+        }
+        return isAmicableVar;
+    }
+    function getFactorsSum(factorsArray) {
+        sum = 0;
+        for (i = 0; i < factorsArray.length; i++) {
+            sum += factorsArray[i];
+        }
+        return sum;
+    }    
+            
+        button = document.getElementById("button");
+    
+        button.onclick = function() {
+            num1 = parseInt(document.form1.num1.value);
+            num2 = parseInt(document.form1.num2.value);
+            
+            num1Factors = getFactors(num1);
+            num2Factors = getFactors(num2);
+            
+            document.getElementById("factorsNum1").innerHTML = "The factors of " + num1 + " are: " + num1Factors;
+            document.getElementById("factorsNum2").innerHTML = "The factors of " + num2 + " are: " + num2Factors;
+
+            if (isAmicable(num1, num2)) {
+                document.getElementById("result").innerHTML = "The numbers: " + num1 + " and " + num2 + " are amicable";
+            } else {
+                document.getElementById("result").innerHTML = "The numbers: " + num1 + " and " + num2 + " are not amicable";
+            }
+        
+    }
+    
+</script>
+</html>
